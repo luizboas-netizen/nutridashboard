@@ -8,6 +8,12 @@ export default function Pagination({ items, itemsPerPage = 5, renderItem }) {
   const startIndex = (currentPage - 1) * itemsPerPage
   const currentItems = items.slice(startIndex, startIndex + itemsPerPage)
 
+ function changePage(page) {
+  if (page >= 1 && page <= totalPages) {
+    setCurrentPage(page)
+  }
+}
+
   return (
     <div className="pagination-container">
       <div className="pagination-items">
@@ -22,19 +28,32 @@ export default function Pagination({ items, itemsPerPage = 5, renderItem }) {
         <nav className="pagination" aria-label="Paginação dos registros">
           <button
             type="button"
-            onClick={() => setCurrentPage((page) => page - 1)}
+            onClick={() => changePage(currentPage - 1)}
             disabled={currentPage === 1}
           >
             Anterior
           </button>
 
-          <span aria-live="polite">
-            Página {currentPage} de {totalPages}
-          </span>
-
+          <div className="pagination-pages" aria-label="Selecionar página">
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (page) => (
+                <button
+                  key={page}
+                  type="button"
+                  className={currentPage === page ? 'active' : ''}
+                  onClick={() => changePage(page)}
+                  aria-label={`Ir para a página ${page}`}
+                  aria-current={currentPage === page ? 'page' : undefined}
+                >
+                  {page}
+                </button>
+              )
+            )}
+          </div>
+          
           <button
             type="button"
-            onClick={() => setCurrentPage((page) => page + 1)}
+            onClick={() => changePage(currentPage + 1)}
             disabled={currentPage === totalPages}
           >
             Próxima

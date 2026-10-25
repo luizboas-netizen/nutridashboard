@@ -1193,3 +1193,53 @@ button:disabled {
 .dropdown-menu button:focus-visible {
   background: var(--green-light);
 }
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 250ms ease, opacity 250ms ease;
+}
+
+.accordion-panel.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.accordion-panel-content {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.accordion-panel-content p {
+  margin: 0 28px 18px 2px;
+  color: #718075;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.accordion-panel.open .accordion-panel-content p {
+  padding-top: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-panel {
+    transition: none;
+  }
+}
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination .pagination-pages button {
+  min-width: 34px;
+  padding: 9px 10px;
+}
+
+.pagination .pagination-pages button.active {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+}

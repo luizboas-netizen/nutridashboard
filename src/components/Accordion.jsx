@@ -40,9 +40,11 @@ export default function Accordion({ items, allowMultiple = false }) {
             <div
               id={panelId}
               className={`accordion-panel ${isOpen ? 'open' : ''}`}
-              hidden={!isOpen}
+              aria-hidden={!isOpen}
             >
-              <p>{item.content}</p>
+              <div className="accordion-panel-content">
+                <p>{item.content}</p>
+              </div>
             </div>
           </section>
         )
